@@ -1,7 +1,7 @@
 <template lang="pug">
 .hello
   header
-    h2  {{ DateTime.fromJSDate(timeOfNextCycle).toFormat("dd.MM.yyyy HH:mm:ss") }}
+    h2  🇨🇿 {{ DateTime.fromJSDate(timeOfNextCycle).toFormat("dd.MM.yyyy HH:mm:ss") }}
   footer
     OnlineMembers
 </template>
@@ -24,7 +24,7 @@ const timeOfNextCycle = await nextFullMoon(props.time)
   flex-direction column
   align-items center
   justify-content center
-  background #5C6784
+  background rgba(#5C6784, 0.8)
   border-radius 1em
   padding 1em
   h2
