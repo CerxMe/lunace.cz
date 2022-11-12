@@ -11,14 +11,14 @@
   </Renderer>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
-import {onMounted, onUnmounted, ref} from "vue";
-const renderer = ref(null);
+import {onMounted, ref} from "vue";
+const renderer = ref<any>(null);
 const mesh = ref(null);
 const rot = ref({ y: Math.PI , z: Math.PI  })
 onMounted(() => {
-  if(renderer.value != null) {
+  if(renderer.value != null ) {
     renderer.value.onBeforeRender(() => {
       rot.value.y = Math.PI * Math.sin(Date.now() / 6000);
       rot.value.z = Math.PI * Math.cos(Date.now() / 6000);
