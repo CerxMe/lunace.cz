@@ -1,36 +1,21 @@
 <template lang="pug">
 .hello
   header
-    h2  {{nextLunacy.toFormat("dd.MM.yyyy HH:mm:ss") }}
-      span  ({{nextLunacy.toRelative()}})
+    h2  {{ DateTime.fromJSDate(timeOfNextCycle).toFormat("dd.MM.yyyy HH:mm:ss") }}
   footer
     OnlineMembers
 </template>
 
 <script setup lang="ts">
-import { createTimeOfInterest } from "astronomy-bundle/time";
 import OnlineMembers from "./OnlineMembers.vue";
-import { createMoon } from "astronomy-bundle/moon";
-import { createEarth } from "astronomy-bundle/earth";
-import type { Location } from "astronomy-bundle/earth/types/LocationTypes";
+import {nextFullMoon} from "./calculateCycle";
 import {DateTime} from "luxon";
+import {ref} from "vue";
+
 const props = defineProps({
   time: {type: Date, required: true},
 })
-
-const location: Location = {
-  lat: 49.8175,
-  lon: 15.4730
-};
-
-const toi = createTimeOfInterest.fromDate(props.time);
-const moon = await createMoon(toi);
-const toiTransit = await moon.getTransit(location);
-
-const nextLunacy = DateTime.fromJSDate(toiTransit.getDate())
-
-const fullMoon = await createMoon(toi).getUpcomingFullMoon()
-
+const timeOfNextCycle = await nextFullMoon(props.time)
 </script>
 
 <style scoped lang="stylus">

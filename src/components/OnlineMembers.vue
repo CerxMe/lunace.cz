@@ -1,16 +1,18 @@
 <template lang="pug">
 .members
-  a(:href="invite") {{onlineMembers}} {{ onlineMembers > 1 ? 'členů': 'člen'  }} je online
+  | {{onlineMembers}} {{ onlineMembers > 1 ? 'členů': 'člen'  }} je online
+  a(:href="invite")  na Discordu
 </template>
 
 <script setup lang="ts">
 import axios from 'axios'
 const guildId = '1008614869429395527'
-const invite = 'https://discord.gg/ushBFgx7eR'
 const apiLink = `https://discordapp.com/api/guilds/${guildId}/widget.json`
 const response = await axios.get(apiLink)
 console.log('onlineOnDiscord', response.data)
-const onlineMembers = response.data.members.length
+const onlineMembers = response.data.presence_count
+const invite = response.data.instant_invite
+
 </script>
 
 <style lang="stylus" scoped>

@@ -3,6 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import TimeTo from './components/TimeTo.vue'
 import BackgroundAnimation from './components/BackgroundAnimation.vue'
+import {ref} from "vue";
 const now = new Date()
 </script>
 
