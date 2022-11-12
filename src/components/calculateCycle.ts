@@ -1,12 +1,6 @@
-
 import { createTimeOfInterest } from "astronomy-bundle/time";
-import OnlineMembers from "./OnlineMembers.vue";
 import { createMoon } from "astronomy-bundle/moon";
-import { createEarth } from "astronomy-bundle/earth";
 import type { Location } from "astronomy-bundle/earth/types/LocationTypes";
-import {DateTime} from "luxon";
-
-
 
 // čas nejbližšího úplňku
 export async function nextFullMoon(date: Date) {
@@ -20,6 +14,8 @@ export async function nextFullMoon(date: Date) {
     const toi = createTimeOfInterest.fromDate(date);
     const upcomingMoon = await createMoon(toi);
     const upcomingFullMoon = upcomingMoon.getUpcomingFullMoon();
+
+    // přechod měsíce přes střed českého nebe v čase nejbližšího úplňku
     const fullMoon = await createMoon(upcomingFullMoon);
     const transit = await fullMoon.getTransit(location);
     return transit.getDate();
