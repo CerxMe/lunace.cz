@@ -2,8 +2,9 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import TimeTo from './components/TimeTo.vue'
+import OnlineMembers from "./components/OnlineMembers.vue";
+
 import BackgroundAnimation from './components/BackgroundAnimation.vue'
-import {ref} from "vue";
 const now = new Date()
 </script>
 
@@ -17,6 +18,10 @@ section
   main
     Suspense
       TimeTo(:time="now")
+      template(v-slot:fallback)
+        p Loading...
+    Suspense
+      OnlineMembers
       template(v-slot:fallback)
         p Loading...
 </template>

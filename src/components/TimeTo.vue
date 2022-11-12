@@ -1,13 +1,11 @@
 <template lang="pug">
 .hello
   header
-    h2  🇨🇿 {{ DateTime.fromJSDate(timeOfNextCycle).toFormat("dd.MM.yyyy HH:mm:ss") }}
-  footer
-    OnlineMembers
+    | {{ timeOfNextCycle.setLocale('cs').toRelative() }}
+    | &lt;{{ timeOfNextCycle.setLocale('cs').toFormat('HH:mm - dd. MMMM yyyy') }}>
 </template>
 
 <script setup lang="ts">
-import OnlineMembers from "./OnlineMembers.vue";
 import {nextFullMoon} from "./calculateCycle";
 import {DateTime} from "luxon";
 import {ref} from "vue";
@@ -15,7 +13,7 @@ import {ref} from "vue";
 const props = defineProps({
   time: {type: Date, required: true},
 })
-const timeOfNextCycle = await nextFullMoon(props.time)
+const timeOfNextCycle = DateTime.fromJSDate(await nextFullMoon(props.time))
 </script>
 
 <style scoped lang="stylus">
@@ -25,8 +23,7 @@ const timeOfNextCycle = await nextFullMoon(props.time)
   align-items center
   justify-content center
   background rgba(#5C6784, 0.8)
-  border-radius 1em
-  padding 1em
-  h2
-    color #4CB963
+  border-radius 0.5em
+  padding .2em
+  color #4CB963
 </style>

@@ -1,7 +1,7 @@
 <template lang="pug">
 .members
-  | {{onlineMembers}} {{ onlineMembers > 1 ? 'členů': 'člen'  }} je online
-  a(:href="invite")  na Discordu
+  | {{onlineMembers}} {{ onlineMembers > 1 ? 'členů': 'člen'  }} je
+  a(:href="invite")  online
 </template>
 
 <script setup lang="ts">
